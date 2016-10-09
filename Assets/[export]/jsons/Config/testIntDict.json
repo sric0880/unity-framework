@@ -1,0 +1,40 @@
+[
+    {
+        "Key": 0,
+        "Value": {
+            "id": 0,
+            "name": "",
+            "desc": "",
+            "hero_id": 0,
+            "isMale": false,
+            "model_male": [
+                "",
+                ""
+            ],
+            "model_female": [
+                "",
+                ""
+            ],
+            "carrer_icon_path": ""
+        }
+    },
+    {
+        "Key": 1,
+        "Value": {
+            "id": 0,
+            "name": "",
+            "desc": "",
+            "hero_id": 0,
+            "isMale": false,
+            "model_male": [
+                "",
+                ""
+            ],
+            "model_female": [
+                "",
+                ""
+            ],
+            "carrer_icon_path": ""
+        }
+    }
+]
