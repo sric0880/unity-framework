@@ -99,7 +99,7 @@ public static class ConfigReader {
 			MethodInfo read = serializer.GetMethod("Read", BindingFlags.Public | BindingFlags.Static);
 			if (read != null)
 			{
-				string path = Path.Combine(ConfigExportPath.genBinPath, name + ".conf");
+				string path = Path.Combine(FileUtils.binary_config_folder, name + ".conf");
 				BinaryReader br = new BinaryReader(File.Open(path, FileMode.Open));
 				byte[] md5 = br.ReadBytes(16);
 				var same = Md5Utility.Md5Compare(md5, Md5Utility.MD5(configGeneratorMd5(type)));

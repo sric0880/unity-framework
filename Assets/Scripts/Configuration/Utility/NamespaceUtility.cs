@@ -3,12 +3,12 @@ using System;
 using System.Text;
 using System.Linq;
 
-public class NamespaceUtility {
+public static class NamespaceUtility {
 
 	// 由于mono下 nested class 的 .NameSpace属性有问题，所以整了这个 workaround
 	public static string GetNameSpace(Type o)
 	{
-		if (o == null) UnityEngine.Debug.Log("owwwwwwwwwwwww");
+		if (o == null) UnityEngine.Debug.Log("Type o is nulllllllll");
 		var nameSpace = o.Namespace;
 		if (!string.IsNullOrEmpty(nameSpace))
 			return nameSpace;

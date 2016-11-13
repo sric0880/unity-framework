@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 898274c1f5fb9584487afb6731e84b20
+timeCreated: 1477574116
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - errorIcon: {fileID: 2800000, guid: f5e296e323cd64d619488c517c4692af, type: 3}
+  - warningIcon: {fileID: 2800000, guid: ecc8f3c040a254019afd50c8bc285b48, type: 3}
+  - messageIcon: {fileID: 2800000, guid: fa976bac27b1e440eb0d8bd71c1caac3, type: 3}
+  - skin: {fileID: 11400000, guid: 099b0b218bc5e41d1bc1952a3f04d2fb, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

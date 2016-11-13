@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Collections.Generic;
 
-public class ClassFieldFilter {
+public static class ClassFieldFilter {
 
 	public static List<FieldInfo> GetClassFieldInfo (Type type)
 	{
