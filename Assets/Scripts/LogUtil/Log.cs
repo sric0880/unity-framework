@@ -66,17 +66,17 @@ public static class Log
 		}
 	}
 
-	public static void Init(Tag logPriority, bool logToUnityConsole, bool logToFile, string logFile)
+	public static void Init(Tag logPriority, bool logToUnityConsole, bool logToFile)
 	{
 		Application.logMessageReceived += OnApplicationLog;
 		Log.logPriority = logPriority;
 		if (logToUnityConsole)
 			DoLogToUnityConsole(true);
 		if (logToFile)
-			DoLogToFile(true, logFile);
+			DoLogToFile(true, FileUtils.log_file(0));
 	}
 
-	public static void OnApplicationLog(string condition, string trace, LogType type)
+	private static void OnApplicationLog(string condition, string trace, LogType type)
 	{
 		string traceToFile = trace.Replace("\n", "\r\n");
 		switch (type)
@@ -117,7 +117,7 @@ public static class Log
 	private static StreamWriter stream;
 	private const int MAX_BACKUP_LOGFILE_NUM = 5;
 
-	public static void DoLogToFile(bool done, string logfile = null)
+	public static void DoLogToFile(bool done, string logfile)
 	{
 		if (done)
 		{
@@ -148,7 +148,7 @@ public static class Log
 		else OnLogEvent -= OnLogToFile;
 	}
 
-	public static void OnLogToFile(LogLine log)
+	private static void OnLogToFile(LogLine log)
 	{
 		if (stream != null)
 		{
@@ -192,7 +192,7 @@ public static class Log
 		}
 		else
 		{
-			_memoryLog.CopyFromFile("");
+			_memoryLog.CopyFromFile(FileUtils.log_file(0));
 		}
 		return _memoryLog;
 	}

@@ -1,0 +1,3 @@
+[submodule "Assets/tolua"]
+	path = Assets/tolua
+	url = https://github.com/sric0880/tolua.git

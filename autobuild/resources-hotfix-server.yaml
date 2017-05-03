@@ -1,0 +1,6 @@
+# hotfix server config
+logDir: log-hotfix
+localDir: hotfix
+# ip: 127.0.0.1
+ip: 
+remoteDir: 

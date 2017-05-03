@@ -1,0 +1,18 @@
+## name for the build package
+export PRODUCT_NAME='yourname'
+
+## xcode build config
+export TEAM_ID='35C78CR8GV'
+
+## build with dsym for debug info
+export DEBUG_INFORMATION_FORMAT='dwarf-with-dsym'
+
+## build without dsym
+# export DEBUG_INFORMATION_FORMAT='dwarf'
+
+## ios sign config
+## get from cmd `security find-identity -v -p codesigning`
+export IDENTITY="16FF5B1AD030C06BFC04703A0D95C1A9626DA2D0"
+
+## android sign config
+export ALIAS='ninjarun2'

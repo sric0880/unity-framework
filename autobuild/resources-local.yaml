@@ -1,0 +1,24 @@
+# resources copy to package
+common:
+ files:
+  # add your folders or files here
+  # don't remove app.metadata
+  - app.metadata
+ ignore:
+  - .DS_Store
+android:
+ files:
+  - Android
+ ignore:
+ios:
+ files:
+  - iOS
+ ignore:
+windows:
+ files:
+  - StandaloneWindows
+ ignore:
+mac:
+ files:
+  - StandaloneOSXIntel64
+ ignore:

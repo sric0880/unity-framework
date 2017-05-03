@@ -9,17 +9,17 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public static partial class FileUtils
 {
-	public const string boot_config_folder = "bootconfig";
-	public const string export_boot_config_folder = "bootconfigexport";
-	public const string raw_config_folder = "config";
-	public const string export_raw_config_folder = "configexport";
-	public const string binary_config_folder = "bin";
-	public static string boot_locale_folder { get { return FormatUtility.Format("bootlocale/{locale}"); } }
-	public static string locale_folder { get { return FormatUtility.Format("locale/{locale}/dictionary"); } }
-	public const string bundle_folder = "assets";
-	public const string log_folder = "log";
-	public static string log_file(int index) { return FormatUtility.Format("log/log_{0}.txt", index); }
-	public const string lookup_dict_file = "lookup"; //May have many different versions
+	public const string boot_config_folder				= "bootconfig";
+	public const string export_boot_config_folder		= "bootconfigexport";
+	public const string binary_config_folder			= "bin";
+	public const string bundle_folder					= "assets";
+	public const string lookup_dict_file				= "lookup"; //May have many different versions
+
+	private const string __boot_locale_folder__			= "bootlocale/{locale}";
+	private const string __locale_folder__				= "locale/{locale}/dictionary";
+	public static string boot_locale_folder { get { return Replace.R(__boot_locale_folder__, LaunchConfig.boot); } }
+	public static string locale_folder { get { return Replace.R(__locale_folder__, LaunchConfig.boot); } }
+	public static string log_file(int index) { return string.Format("log/log_{0}.txt", index); }
 
 	private static readonly fsSerializer _serializer = new fsSerializer();
 	private static Dictionary<string, string> filenameLookupDict = new Dictionary<string, string>();
@@ -27,8 +27,8 @@ public static partial class FileUtils
 	/// <summary>
 	/// FIXME: resources folder root dir
 	/// </summary>
-	private static string externalEditor = "../../resources/com.sric.test";
-	private static string externalPlayer = "../com.sric.test";
+	private static string externalEditor = "../resources/";
+	private static string externalPlayer = "../";
 
 	public static string externalFolder
 	{
@@ -37,6 +37,7 @@ public static partial class FileUtils
 			switch (Application.platform)
 			{
 				case RuntimePlatform.WindowsEditor:
+				case RuntimePlatform.OSXEditor:
 					return Path.GetFullPath(externalEditor);
 				case RuntimePlatform.WindowsPlayer:
 					return Path.GetFullPath(externalPlayer);

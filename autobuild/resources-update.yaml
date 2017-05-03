@@ -1,0 +1,22 @@
+# resources update to server
+common:
+ files:
+# add your folders and files here
+ ignore:
+  - .DS_Store
+android:
+ files:
+  - Android
+ ignore:
+ios:
+ files:
+  - iOS
+ ignore:
+windows:
+ files:
+  - StandaloneWindows
+ ignore:
+mac:
+ files:
+  - StandaloneOSXIntel64
+ ignore:
