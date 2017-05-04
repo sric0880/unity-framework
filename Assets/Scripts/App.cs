@@ -10,9 +10,6 @@ public class App : MonoBehaviour {
 
 		GameFSM.Instance.Start();
 
-		//TODO: 3rd party do it
-		LocalNotificationsHelper.CancelAllLocalNotifications();
-
 		InitManagers();
 	}
 
