@@ -1,3 +1,6 @@
 [submodule "Assets/tolua"]
 	path = Assets/tolua
 	url = https://github.com/sric0880/tolua.git
+[submodule "Assets/Node_Editor"]
+	path = Assets/Node_Editor
+	url = https://github.com/sric0880/Node_Editor.git
