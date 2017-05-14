@@ -78,7 +78,11 @@ svn checkout svn://localhost:3690/resources/branches/master resources
 
 > https://github.com/sric0880/unity-buildscripts
 
-And then you can setup CI tools like jenkins, buildbot, etc using this buildscripts.
+And then you can integrate with CI tools like jenkins, buildbot, etc.
+
+Buildbot config file see this: [`master.cfg`](https://gist.github.com/sric0880/230571ef5ecb4883fe08a927adcf20aa)
+
+Then you can build with one command.
 
 # Links
 * https://github.com/topameng/tolua
