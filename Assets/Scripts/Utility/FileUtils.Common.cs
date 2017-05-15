@@ -1,11 +1,6 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using System.IO;
-using System.Text;
-using System.Reflection;
-using FullSerializer;
 using System.Collections.Generic;
-using System.Runtime.Serialization.Formatters.Binary;
 
 public static partial class FileUtils
 {
@@ -21,7 +16,6 @@ public static partial class FileUtils
 	public static string locale_folder { get { return Replace.R(__locale_folder__, LaunchConfig.boot); } }
 	public static string log_file(int index) { return string.Format("log/log_{0}.txt", index); }
 
-	private static readonly fsSerializer _serializer = new fsSerializer();
 	private static Dictionary<string, string> filenameLookupDict = new Dictionary<string, string>();
 
 	/// <summary>
@@ -133,43 +127,6 @@ public static partial class FileUtils
 		return ret;
 	}
 
-	public static void GetObjectFromJsonFile<T>(string filename, ref T obj)
-	{
-		fsData json_data;
-		fsResult res = fsJsonParser.Parse(GetStringFromFile(filename), out json_data);
-		if (res.Failed)
-		{
-			Log.Error("Error parse json from file: {0}", filename);
-			return;
-		}
-		_serializer.TryDeserialize<T>(json_data, ref obj).AssertSuccess();
-	}
-
-	public static void GetObjectFromBinaryFile<T>(string filename, ref T obj)
-	{
-		var stream = OpenRead(filename);
-		if (stream != null)
-		{
-			var formatter = new BinaryFormatter();
-			obj = (T)formatter.Deserialize(stream);
-			stream.Close();
-		}
-	}
-
-	public static void GetFiledValueFromJsonFile(string filename, FieldInfo field)
-	{
-		fsData json_data;
-		fsResult res = fsJsonParser.Parse(GetStringFromFile(filename), out json_data);
-		if (res.Failed)
-		{
-			Log.Error("Error parse json from file: {0}", filename);
-			return;
-		}
-		var value = field.GetValue(null);
-		_serializer.TryDeserialize(json_data, field.FieldType, ref value).AssertSuccess();
-		field.SetValue(null, value);
-	}
-
 	/// <summary>
 	/// Loads the filename lookup dictionary from file which is generated manually and pack into the release package.
 	/// Filename is the key, relative pathname is then value. Support mutiple values.
@@ -231,33 +188,6 @@ public static partial class FileUtils
 					writer.WriteLine(line);
 				}
 			}
-			filestream.Close();
-		}
-	}
-
-	public static void WriteToJsonFile<T>(string pathname, T obj) where T : new()
-	{
-		fsData data;
-		_serializer.TrySerialize(obj, out data).AssertSuccess();
-		byte[] content = new UTF8Encoding(true).GetBytes(fsJsonPrinter.PrettyJson(data));
-		WriteToFile(pathname, content);
-	}
-
-	public static void WriteToJsonFile(string pathname, FieldInfo fieldInfo)
-	{
-		fsData data;
-		_serializer.TrySerialize(fieldInfo.FieldType, fieldInfo.GetValue(null), out data).AssertSuccess();
-		byte[] content = new UTF8Encoding(true).GetBytes(fsJsonPrinter.PrettyJson(data));
-		WriteToFile(pathname, content);
-	}
-
-	public static void WriteToBinaryFile(string pathname, object obj)
-	{
-		var filestream = OpenWrite(pathname);
-		if (filestream != null)
-		{
-			var formatter = new BinaryFormatter();
-			formatter.Serialize(filestream, obj);
 			filestream.Close();
 		}
 	}

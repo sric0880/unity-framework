@@ -1,10 +1,6 @@
 ﻿#if UNITY_EDITOR || UNITY_IOS || UNITY_STANDALONE
 //#if UNITY_IOS
 using System.IO;
-using System.Text;
-using System.Reflection;
-using System.Collections.Generic;
-using FullSerializer;
 
 /// <summary>
 /// File and directory operation utility

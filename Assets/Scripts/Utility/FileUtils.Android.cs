@@ -2,10 +2,7 @@
 //#if UNITY_ANDROID
 using System.IO;
 using System.Text;
-using System.Reflection;
-using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using FullSerializer;
 
 /// <summary>
 /// File and directory operation utility
