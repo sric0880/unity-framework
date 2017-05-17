@@ -26,13 +26,13 @@ public static class Config {
 	[LuaExport("TestPrivate")]
 	public static ConfTestPrivate testprivate;
 	//[Export("Z_int字典", "id")]
-	[LuaExport("IntDict")]
+	[LuaExport("IntDict", "id")]
 	public static Dictionary<int, ConfTestDict> testIntDict;
 	//[Export("Z_string字典", "stringId")]
-	[LuaExport("StringDict")]
+	[LuaExport("StringDict", "stringId")]
 	public static Dictionary<string, ConfTestDict2> testStrDict;
 	//[Export("Z_enum字典", "module")]
-	[LuaExport("EnumsDict")]
+	[LuaExport("EnumsDict", "module")]
 	public static Dictionary<Modules, ConfTestDict1> testEnumDict;
 	//[Export("Z_class字典")]
 	[LuaExport("HeroesDict")]

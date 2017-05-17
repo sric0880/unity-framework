@@ -51,6 +51,7 @@ public static class CodegenExe {
 		}
 		_serializer.Config.CustomDateTimeFormatString = "G";
 		_serializer.AddConverter(new MyCustomEnumConverter());
+		_serializer.AddConverter(new MyDictionaryConverter());
 		foreach (var field in exportFields)
 		{
 			if (field.GetValue(null) == null)

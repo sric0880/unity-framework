@@ -44,6 +44,7 @@ public static class ConfiggenExe
 			return;
 		}
 		_serializer.AddConverter(new MyCustomEnumConverter());
+		_serializer.AddConverter(new MyDictionaryConverter());
 		foreach (var field in exportFields)
 		{
 			var exportAttr = TypeUtility.GetCustomAttribute<ExportAttribute>(field);

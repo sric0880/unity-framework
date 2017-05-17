@@ -15,6 +15,7 @@ files:
  - Configuration/Utility/NamespaceUtility.cs
  - Configuration/Editor/Main/CodegenExe.cs
  - Configuration/Editor/Main/MyCustomEnumConverter.cs
+ - Configuration/Editor/Main/MyDictionaryConverter.cs
  - Configuration/Editor/Main/LocaleJsonObject.cs
 folders:
  - Scripts/Utility/*.cs
