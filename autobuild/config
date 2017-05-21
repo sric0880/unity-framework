@@ -14,5 +14,11 @@ export DEBUG_INFORMATION_FORMAT='dwarf-with-dsym'
 ## get from cmd `security find-identity -v -p codesigning`
 export IDENTITY="16FF5B1AD030C06BFC04703A0D95C1A9626DA2D0"
 
-## android sign config
-export ALIAS='ninjarun2'
+## android keystore file path
+export KEYSTORE_FILE=$UNITY_PROJECT/autobuild/android/keystore
+## android keystore alias
+export ALIAS='my-alias'
+## android keystore password
+export KEYSTORE_PWD=123456
+## android alias password
+export KEY_PWD=123456

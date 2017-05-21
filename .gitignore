@@ -28,10 +28,6 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
-/autobuild/android/keystore
-/autobuild/android/pwd
-/autobuild/ios/embedded.mobileprovision
-/autobuild/ios/entitlements.plist
 /lua/tolua
 .DS_Store
 */.DS_Store
