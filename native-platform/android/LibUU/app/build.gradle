@@ -29,7 +29,7 @@ android {
         copy {
             from 'build/intermediates/cmake/release/obj/'
             include '**/*.so'
-            into '../../../../Assets/Plugins/Android/uu/libs/'
+            into '../../../../Assets/Plugins/Android/libs/'
         }
     }
 }
