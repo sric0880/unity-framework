@@ -13,6 +13,8 @@ export DEBUG_INFORMATION_FORMAT='dwarf-with-dsym'
 ## ios sign config
 ## get from cmd `security find-identity -v -p codesigning`
 export IDENTITY="16FF5B1AD030C06BFC04703A0D95C1A9626DA2D0"
+export PROVISION_FILE=$UNITY_PROJECT/autobuild/ios/embedded.mobileprovision
+export ENTITLEMENTS_FILE=$UNITY_PROJECT/autobuild/ios/entitlements.plist
 
 ## android keystore file path
 export KEYSTORE_FILE=$UNITY_PROJECT/autobuild/android/keystore
@@ -22,3 +24,6 @@ export ALIAS='my-alias'
 export KEYSTORE_PWD=123456
 ## android alias password
 export KEY_PWD=123456
+
+## ipapk-server ip and port config
+export IPAPK_SERVER_ADDRESS=https://127.0.0.1:1234

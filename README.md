@@ -76,7 +76,7 @@ svn mkdir svn://localhost:3690/resources/branches/master -m "add branch master" 
 svn checkout svn://localhost:3690/resources/branches/master resources
 ```
 
-## 4. Setup unitybuild tools
+## 4. Setup unitybuild tools with CI
 
 > https://github.com/sric0880/unity-buildscripts
 
@@ -84,7 +84,17 @@ And then you can integrate with CI tools like jenkins, buildbot, etc.
 
 Buildbot config file see this: [`master.cfg`](https://gist.github.com/sric0880/230571ef5ecb4883fe08a927adcf20aa)
 
-Then you can build with one command.
+Then you can build ipa/apk using one click on the website.
+
+## 5. Setup ipa/apk download server
+@ [`ipapk-server`](https://github.com/zhao0/ipapk-server)
+
+```sh
+#start ipapk-server:
+pm2 start ipapk-server
+# or stop it
+pm2 stop ipapk-server
+```
 
 # Links
 * https://github.com/topameng/tolua
@@ -93,3 +103,4 @@ Then you can build with one command.
 * https://github.com/sric0880/pycsharpmake
 * https://github.com/sric0880/tolua
 * https://github.com/neuecc/UniRx
+* https://github.com/zhao0/ipapk-server
