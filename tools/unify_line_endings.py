@@ -8,6 +8,7 @@ import re
 import platform
 
 curDir = os.path.dirname(os.path.realpath(__file__))
+sourceCodeFolder = os.path.join(curDir, os.path.abspath("../Assets"))
 win_line_ending = re.compile('.*\r\n$', re.MULTILINE)
 linux_line_ending = re.compile('.*\n$', re.MULTILINE)
 common_line_ending = re.compile('\r?\n', re.MULTILINE)
@@ -53,16 +54,6 @@ def collect_bad_files(dir):
 		if not is_line_ending_unified(fn):
 			need_to_be_processed.append(fn)
 
-def get_src_folders():
-	os.chdir(curDir)
-	yield os.path.abspath("../client/Assets/Code")
-	yield os.path.abspath("../client/Assets/ArtShare")
-	yield os.path.abspath("../client/Assets/Wwise")
-
-def collect():
-	for dir in get_src_folders():
-		collect_bad_files(dir)
-
 def process():
 	if len(need_to_be_processed) == 0:
 		print "Everything is ok!"
@@ -92,7 +83,7 @@ def press_to_continue():
 	pause_with_prompt('Press any key to exit...')
 
 def main():
-	collect()
+	collect_bad_files(sourceCodeFolder)
 	process()
 	press_to_continue()
 
