@@ -1,5 +1,5 @@
-exampleConfigDir: /Users/qiong/Documents/hub/resources/config_example
-xlsxConfigDir: /Users/qiong/Documents/hub/resources/xlsxfiles
-binaryConfigDir: /Users/qiong/Documents/hub/resources/bin
-localeDir: /Users/qiong/Documents/hub/resources/locale
-luaDir: /Users/qiong/Documents/hub/resources/luac
+exampleConfigDir: ../resources/config_example
+xlsxConfigDir: ../resources/xlsxfiles
+binaryConfigDir: ../resources/bin
+localeDir: ../resources/locale
+luaDir: ../resources/luac

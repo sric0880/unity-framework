@@ -6,10 +6,15 @@ __assets_path__ = os.path.join(__project_path__, 'Assets')
 
 windows = platform.system().startswith("Windows")
 encoders = {
-'win': ('LuaEncoder/luajit', 'luajit.exe -b {src} {dst}c'),
+'win32': ('LuaEncoder/luajit', 'luajit32.exe -b {src} {dst}c'),
+'win64': ('LuaEncoder/luajit64', 'luajit64.exe -b {src} {dst}c'),
 'mac': ('LuaEncoder/luavm', './luac -o {dst}c {src}'),
 'ios': ('LuaEncoder/luajit_ios/'+ platform.machine(), './luajit -b {src} {dst}c'),
 }
+if platform.architecture()[0] == '32bit':
+	encoders['win'] = encoders['win32']
+else:
+	encoders['win'] = encoders['win64']
 encoders['android'] = encoders['win'] if windows else encoders['ios']
 if windows:
 	choices = ['android', 'windows']
@@ -25,8 +30,8 @@ encoder = encoders[args.platform]
 pathConfigName = os.path.join(__scirpt_path__, '../pathvars.yml')
 with open(pathConfigName, 'r') as stream:
 	content = yaml.load(stream)
-luaDir = content['luaDir']
-binaryConfigDir = content['binaryConfigDir']
+luaDir = os.path.join(__project_path__, content['luaDir'])
+binaryConfigDir = os.path.join(__project_path__, content['binaryConfigDir'])
 luaSrcDir = [os.path.join(__project_path__, 'lua/main'), os.path.join(__project_path__, 'lua/tolua')]
 
 # Main logic

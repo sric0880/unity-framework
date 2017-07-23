@@ -9,8 +9,8 @@ luaExportDir = os.path.join(__project_path__, 'lua/main/Config')
 
 with open(pathConfigName, 'r') as stream:
 	content = yaml.load(stream)
-xlsxConfigFolder=content['xlsxConfigDir']
-binaryConfigFolder=content['binaryConfigDir']
+xlsxConfigFolder=os.path.join(__project_path__, content['xlsxConfigDir'])
+binaryConfigFolder=os.path.join(__project_path__, content['binaryConfigDir'])
 
 def printStep(name):
 	print('\n')

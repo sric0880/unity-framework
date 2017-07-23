@@ -12,7 +12,7 @@ pathConfigName = os.path.join(__scirpt_path__, '../pathvars.yml')
 
 with open(pathConfigName, 'r') as stream:
 	content = yaml.load(stream)
-exampleConfigFolder=content['exampleConfigDir']
+exampleConfigFolder=os.path.join(__project_path__, content['exampleConfigDir'])
 
 def printStep(name):
 	print('\n')

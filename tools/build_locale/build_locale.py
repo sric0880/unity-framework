@@ -8,8 +8,8 @@ pathConfigName = os.path.join(__scirpt_path__, '../pathvars.yml')
 
 with open(pathConfigName, 'r') as stream:
 	content = yaml.load(stream)
-localeDir=content['localeDir']
-xlsxConfigFolder=content['xlsxConfigDir']
+localeDir=os.path.join(__project_path__, content['localeDir'])
+xlsxConfigFolder=os.path.join(__project_path__, content['xlsxConfigDir'])
 pattern = re.compile(r'Value:(\w+)<unicode>')
 
 def parseOneXlsxFile(xlsxfile):
