@@ -1,5 +1,6 @@
 ## name for the build package
-export PRODUCT_NAME='yourname'
+## for android package name and for xcode bundleid com.xxx.${PRODUCT_NAME}
+export PRODUCT_NAME='unityframework'
 
 ## xcode build config
 export TEAM_ID='35C78CR8GV'
