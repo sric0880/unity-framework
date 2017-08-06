@@ -10,7 +10,7 @@ public class App : MonoBehaviour {
 
 		GameFSM.Instance.Start();
 
-		InitManagers();
+		DoManagers(true);
 	}
 
 	private void Start () {
@@ -29,6 +29,7 @@ public class App : MonoBehaviour {
 	private void OnDestroy()
 	{
 		Log.Info("App destroy");
+		DoManagers(false);
 	}
 
 	private void OnApplicationPause()
@@ -52,8 +53,15 @@ public class App : MonoBehaviour {
 		
 	}
 
-	private void InitManagers()
+	private void DoManagers(bool isInit)
 	{
-		LuaFramework.LuaManager.Instance.OnInit();
+		if (isInit)
+		{
+			LuaFramework.LuaManager.Instance.OnInit();
+		}
+		else
+		{
+			LuaFramework.LuaManager.Instance.Dispose();
+		}
 	}
 }
