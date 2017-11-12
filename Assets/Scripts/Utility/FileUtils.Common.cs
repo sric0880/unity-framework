@@ -4,19 +4,12 @@ using System.Collections.Generic;
 
 public static partial class FileUtils
 {
-	public const string boot_config_folder				= "bootconfig";
-	public const string export_boot_config_folder		= "bootconfigexport";
-	public const string binary_config_folder			= "bin";
-	public const string bundle_folder					= "assets";
-	public const string lookup_dict_file				= "lookup"; //May have many different versions
-
-	private const string __boot_locale_folder__			= "bootlocale/{locale}";
-	private const string __locale_folder__				= "locale/{locale}/dictionary";
-	public static string boot_locale_folder { get { return Replace.R(__boot_locale_folder__, LaunchConfig.boot); } }
-	public static string locale_folder { get { return Replace.R(__locale_folder__, LaunchConfig.boot); } }
+	public const string export_boot_config_folder = "bootconfigexport";
+	public const string binary_config_folder = "bin";
+	public static string boot_locale_folder { get { return Replace.R("bootlocale/{locale}", LaunchConfig.boot); } }
+	public static string locale_folder { get { return Replace.R("locale/{locale}/dictionary", LaunchConfig.boot); } }
 	public static string log_file(int index) { return string.Format("log/log_{0}.txt", index); }
-
-	private static Dictionary<string, string> filenameLookupDict = new Dictionary<string, string>();
+	public static string bundle_folder { get { return string.Format("assets/{0}", PlatformNameUtils.GetPlatformName()); } }
 
 	/// <summary>
 	/// FIXME: resources folder root dir
@@ -125,21 +118,6 @@ public static partial class FileUtils
 			stream.Close();
 		}
 		return ret;
-	}
-
-	/// <summary>
-	/// Loads the filename lookup dictionary from file which is generated manually and pack into the release package.
-	/// Filename is the key, relative pathname is then value. Support mutiple values.
-	/// Example 1: /assets/bundles/ui/gg_window.bundle, the pair is {gg_window.bundle: bundles/ui/gg_window.bundle}
-	/// </summary>
-	public static void LoadFilenameLookupDict()
-	{
-		foreach (var line in GetStringArrayFromFile(lookup_dict_file))
-		{
-			int index = line.LastIndexOfAny(new char[] { '/', '\\' });
-			string filename = line.Substring(index + 1);
-			filenameLookupDict.Add(filename, line);
-		}
 	}
 
 	public static FileStream OpenWrite(string pathname)

@@ -32,28 +32,15 @@ public static partial class FileUtils
 			Log.Error("filename is null or empty");
 			return null;
 		}
-		string rPath;
-		if (filenameLookupDict.TryGetValue(filename, out rPath))
-		{
-			if (string.IsNullOrEmpty(rPath))
-			{
-				Log.Error("filename {0} find full path is null or empty", filename);
-				return null;
-			}
-		}
-		else
-		{
-			rPath = filename;
-		}
 		//External folder first
-		string fullpath = Path.Combine(externalFolder, rPath);
+		string fullpath = Path.Combine(externalFolder, filename);
 		if (isFileExistExternal(fullpath))
 		{
 			return fullpath;
 		}
 		else
 		{
-			return isFileExistInternal(rPath) ? rPath : null;
+			return isFileExistInternal(filename) ? filename : null;
 		}
 	}
 
