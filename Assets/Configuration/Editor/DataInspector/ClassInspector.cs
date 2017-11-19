@@ -11,9 +11,14 @@ public class ClassInspector : DataInspector {
 	
 	public override bool inspect(ref object data, Type type, string name, string path)
 	{
-		var fields = ClassFieldFilter.GetClassFieldInfo(type);
-		//inspect the fields
 		bool changed = false;
+		var fields = ClassFieldFilter.GetClassFieldInfo(type);
+		var properties = ClassFieldFilter.GetClassPropertyInfo(type);
+		if (fields.Count == 0 && properties.Count == 0)
+		{
+			return changed;
+		}
+		//inspect the fields
 		SortedDictionary<string, FieldInfo> fieldDict = new SortedDictionary<string, FieldInfo>();
 		foreach (var fieldinfo in fields)
 		{
@@ -29,6 +34,17 @@ public class ClassInspector : DataInspector {
 			if (DataInspectorUtility.inspect(ref value, valueType, keyvalue.Key, path))
 			{
 				keyvalue.Value.SetValue(data, value);
+				changed = true;
+			}
+		}
+		foreach (var propertyInfo in properties)
+		{
+			object value = propertyInfo.GetValue(data, null);
+			if (value == null) continue;
+			Type valueType = value.GetType();
+			if (DataInspectorUtility.inspect(ref value, valueType, propertyInfo.Name, path))
+			{
+				propertyInfo.SetValue(data, value, null);
 				changed = true;
 			}
 		}

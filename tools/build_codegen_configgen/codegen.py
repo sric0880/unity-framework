@@ -1,14 +1,14 @@
 #-*- coding: utf-8
 import sys, os, yaml, shutil, pycsharpmake
 from excelconverter import convertJson2Xlsx
-__scirpt_path__ = os.path.dirname(os.path.abspath(__file__))
-__project_path__ = os.path.dirname(os.path.dirname(__scirpt_path__))
+__script_path__ = os.path.dirname(os.path.abspath(__file__))
+__project_path__ = os.path.dirname(os.path.dirname(__script_path__))
 __assets_path__ = os.path.join(__project_path__, 'Assets')
 autoGenFolder=os.path.join(__assets_path__, 'Configuration/AutoGen')
 luaExportDir = os.path.join(__project_path__, 'lua/main/Config')
-codegenMakefileName = os.path.join(__scirpt_path__, 'codegen_makefile.yml')
-configgenMakefileName = os.path.join(__scirpt_path__, 'configgen_makefile.yml')
-pathConfigName = os.path.join(__scirpt_path__, '../pathvars.yml')
+codegenMakefileName = os.path.join(__script_path__, 'codegen_makefile.yml')
+configgenMakefileName = os.path.join(__script_path__, 'configgen_makefile.yml')
+pathConfigName = os.path.join(__script_path__, '../pathvars.yml')
 
 with open(pathConfigName, 'r') as stream:
 	content = yaml.load(stream)
@@ -44,7 +44,7 @@ if __name__ == "__main__":
 	# 编译codegen
 	printStep('compile codegen')
 	makefile = pycsharpmake.Makefile()
-	makefile.make(codegenMakefileName, __scirpt_path__, __assets_path__)
+	makefile.make(codegenMakefileName, __script_path__, __assets_path__)
 
 	printStep('clear generated code')
 	makeAutoGenFolder()
@@ -55,4 +55,4 @@ if __name__ == "__main__":
 	__convertJson2Xlsx()
 
 	printStep('compile configgen')
-	makefile.make(configgenMakefileName, __scirpt_path__, __assets_path__)
+	makefile.make(configgenMakefileName, __script_path__, __assets_path__)

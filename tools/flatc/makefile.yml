@@ -1,0 +1,9 @@
+out: flatc.dll
+main: 
+debug: No
+depends:
+defines: 
+files:
+folders:
+ - UF/GameSave//*.cs
+ - net/FlatBuffers/*.cs

@@ -58,10 +58,12 @@ public class App : MonoBehaviour {
 		if (isInit)
 		{
 			LuaFramework.LuaManager.Instance.OnInit();
+
 		}
 		else
 		{
 			LuaFramework.LuaManager.Instance.Dispose();
+			UF.Managers.GameSaveManager.Instance.Save();
 		}
 	}
 }

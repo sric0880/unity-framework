@@ -35,6 +35,20 @@ public static class ClassFieldFilter {
 		return fields;
 	}
 
+	public static List<PropertyInfo> GetClassPropertyInfo(Type type)
+	{
+		//get public static and notstatic members
+		List<PropertyInfo> properties = new List<PropertyInfo>();
+		properties.AddRange(type.GetProperties(BindingFlags.Instance | BindingFlags.Public));
+		properties.AddRange(type.GetProperties(BindingFlags.Static | BindingFlags.Public));
+		//sort fields
+		properties.Sort((a, b) =>
+		{
+			return string.Compare(a.Name, b.Name);
+		});
+		return properties;
+	}
+
 	public static List<FieldInfo> GetConfigFieldInfo(Type type, ExportAttributeType attrType = ExportAttributeType.CS)
 	{
 		var fields = type.GetFields(BindingFlags.Public | BindingFlags.Static);

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import os, yaml, re, argparse, platform, shutil, struct
-__scirpt_path__ = os.path.dirname(os.path.abspath(__file__))
-__project_path__ = os.path.dirname(os.path.dirname(__scirpt_path__))
+__script_path__ = os.path.dirname(os.path.abspath(__file__))
+__project_path__ = os.path.dirname(os.path.dirname(__script_path__))
 __assets_path__ = os.path.join(__project_path__, 'Assets')
 
 windows = platform.system().startswith("Windows")
@@ -27,7 +27,7 @@ args = parser.parse_args()
 
 encoder = encoders[args.platform]
 
-pathConfigName = os.path.join(__scirpt_path__, '../pathvars.yml')
+pathConfigName = os.path.join(__script_path__, '../pathvars.yml')
 with open(pathConfigName, 'r') as stream:
 	content = yaml.load(stream)
 luaDir = os.path.join(__project_path__, content['luaDir'])

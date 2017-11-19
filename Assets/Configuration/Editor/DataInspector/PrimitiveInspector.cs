@@ -40,11 +40,13 @@ public class PrimitiveInspector : DataInspector{
 		}
 		else if (data is short) //Int16
 		{
-			newData = (short)EditorGUILayout.IntField(name, (int)data);
+			int temp = Convert.ToInt32(data);
+			newData = (short)EditorGUILayout.IntField(name, temp);
 		}
 		else if (data is ushort) //UInt64
 		{
-			newData = (ushort)EditorGUILayout.IntField(name, (int)data);
+			int temp = Convert.ToInt32(data);
+			newData = (ushort)EditorGUILayout.IntField(name, temp);
 		}
 		else if (data is long) //Int64
 		{

@@ -10,6 +10,7 @@ public static partial class FileUtils
 	public static string locale_folder { get { return Replace.R("locale/{locale}/dictionary", LaunchConfig.boot); } }
 	public static string log_file(int index) { return string.Format("log/log_{0}.txt", index); }
 	public static string bundle_folder { get { return string.Format("assets/{0}", PlatformNameUtils.GetPlatformName()); } }
+	public static string gamesave(long roleId) { return string.Format("gamesave/{0}", roleId); }
 
 	/// <summary>
 	/// FIXME: resources folder root dir

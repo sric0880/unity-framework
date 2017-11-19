@@ -1,10 +1,10 @@
 #-*- coding: utf-8
 import sys, os, yaml, pycsharpmake, shutil
 from excelconverter import convertXlsx2Json, convertXlsx2Lua
-__scirpt_path__ = os.path.dirname(os.path.abspath(__file__))
-__project_path__ = os.path.dirname(os.path.dirname(__scirpt_path__))
+__script_path__ = os.path.dirname(os.path.abspath(__file__))
+__project_path__ = os.path.dirname(os.path.dirname(__script_path__))
 __assets_path__ = os.path.join(__project_path__, 'Assets')
-pathConfigName = os.path.join(__scirpt_path__, '../pathvars.yml')
+pathConfigName = os.path.join(__script_path__, '../pathvars.yml')
 luaExportDir = os.path.join(__project_path__, 'lua/main/Config')
 
 with open(pathConfigName, 'r') as stream:
@@ -52,7 +52,7 @@ if __name__ == "__main__":
 	__convertXlsx2JsonOrLua();
 
 	printStep('config gen')
-	makefile = pycsharpmake.Makefile(os.path.join(__scirpt_path__, 'bin/configgen.exe'))
+	makefile = pycsharpmake.Makefile(os.path.join(__script_path__, 'bin/configgen.exe'))
 	makefile.run(xlsxConfigFolder, binaryConfigFolder, debug=True)
 
 	printStep('remove json files')
