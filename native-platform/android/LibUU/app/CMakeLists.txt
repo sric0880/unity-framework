@@ -18,10 +18,8 @@ add_library( # Sets the name of the library.
              # Provides a relative path to your source file(s).
              # Associated headers in the same location as their source
              # file are automatically included.
-             src/main/cpp/native-lib.cpp
-             src/main/cpp/UUAssetManager.cpp
+             src/main/cpp/UUHelper.cpp
              src/main/cpp/ZipFile.cpp
-             src/main/cpp/JniHelper.cpp
              src/main/cpp/minizip/ioapi.cpp
              src/main/cpp/minizip/ioapi_mem.cpp
              src/main/cpp/minizip/unzip.cpp
@@ -33,12 +31,12 @@ add_library( # Sets the name of the library.
 # you want to add. CMake verifies that the library exists before
 # completing its build.
 
-find_library( # Sets the name of the path variable.
-              log-lib
+# find_library( # Sets the name of the path variable.
+              # log-lib
 
               # Specifies the name of the NDK library that
               # you want CMake to locate.
-              log )
+              # log )
 
 # Specifies libraries CMake should link to your target library. You
 # can link multiple libraries, such as libraries you define in the
@@ -49,6 +47,5 @@ target_link_libraries( # Specifies the target library.
 
                        # Links the target library to the log library
                        # included in the NDK.
-                       ${log-lib}
                        z
                        android)

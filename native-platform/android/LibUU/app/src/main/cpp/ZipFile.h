@@ -1,14 +1,15 @@
 #ifndef __SUPPORT_ZIPUTILS_H__
 #define __SUPPORT_ZIPUTILS_H__
 
+#include "minizip/unzip.h"
 #include <string>
+#include <unordered_map>
 
-#ifndef _unz64_H
-typedef struct unz_file_info_s unz_file_info;
-#endif
-
-class ZipFilePrivate;
-struct unz_file_info_s;
+typedef struct ZipEntryInfo_S
+{
+    unz_file_pos pos;
+    uLong uncompressed_size;
+} ZipEntryInfo;
 
 /**
 * Zip file - reader helper class.
@@ -29,19 +30,9 @@ public:
     *               For example, "assets/". Other files will be missed.
     *
     */
-    ZipFile(const std::string &zipFile, const std::string &filter = std::string());
+    ZipFile(const char* zipFile);
     ZipFile(const void* buffer, unsigned long size);
     virtual ~ZipFile();
-
-    /**
-    * Regenerate accessible file list based on a new filter string.
-    *
-    * @param filter New filter string (first part of files names)
-    * @return true whenever zip file is open successfully and it is possible to locate
-    *              at least the first file, false otherwise
-    *
-    */
-    bool setFilter(const std::string &filter);
 
     /**
     * Check does a file exists or not in zip file
@@ -53,6 +44,14 @@ public:
     bool fileExists(const std::string &fileName) const;
 
     /**
+     * Check does a dir exists or not in zip file
+     *
+     * @param fileName File to be checked on existence
+     * @return true whenever file exists, false otherwise
+     */
+    bool directoryExists(const std::string &dirName) const;
+
+    /**
     * Get resource file data from a zip file.
     * @param fileName File name
     * @param[out] size If the file read operation succeeds, it will be the data size, otherwise 0.
@@ -60,16 +59,17 @@ public:
     * @warning Recall: you are responsible for calling free() on any Non-nullptr pointer returned.
     *
     */
-    unsigned char *getFileData(const std::string &fileName, ssize_t *size);
+    unsigned char *getFileData(const std::string &fileName, unsigned long *size);
 
-    std::string getFirstFilename();
-    std::string getNextFilename();
+    unsigned long getFileSize(const std::string &fileName) const;
 
 private:
 
-    int getCurrentFileInfo(std::string *filename, unz_file_info *info);
+    unzFile zipFile;
 
-    /** Internal data like zip file pointer / file list array and so on */
-    ZipFilePrivate *_data;
+    // std::unordered_map is faster if available on the platform
+    std::unordered_map<std::string, ZipEntryInfo> fileList;
+
+    bool setFilter();
 };
 #endif // __SUPPORT_ZIPUTILS_H__

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.IO;
 using System.Collections.Generic;
 
@@ -16,7 +17,7 @@ public static partial class FileUtils
 	/// FIXME: resources folder root dir
 	/// </summary>
 	private static string externalEditor = "../resources/";
-	private static string externalPlayer = "../";
+	private static string externalPlayer = "./";
 
 	public static string externalFolder
 	{
@@ -28,6 +29,7 @@ public static partial class FileUtils
 				case RuntimePlatform.OSXEditor:
 					return Path.GetFullPath(externalEditor);
 				case RuntimePlatform.WindowsPlayer:
+				case RuntimePlatform.OSXPlayer:
 					return Path.GetFullPath(externalPlayer);
 				case RuntimePlatform.Android:
 					return Path.GetFullPath(Application.persistentDataPath);
@@ -75,50 +77,6 @@ public static partial class FileUtils
 	public static bool IsFileExist(string filename)
 	{
 		return GetFullPathForFilename(filename) != null;
-	}
-
-	public static string GetStringFromFile(string filename)
-	{
-		var stream = OpenRead(filename);
-		string ret = string.Empty;
-		if (stream != null)
-		{
-			using (var reader = new StreamReader(stream))
-			{
-				ret = reader.ReadToEnd();
-			}
-			stream.Close();
-		}
-		return ret;
-	}
-
-	public static IEnumerable<string> GetStringArrayFromFile(string filename)
-	{
-		var stream = OpenRead(filename);
-		if (stream != null)
-		{
-			using (var reader = new StreamReader(stream))
-			{
-				while (!reader.EndOfStream)
-				{
-					yield return reader.ReadLine();
-				}
-			}
-			stream.Close();
-		}
-	}
-
-	public static byte[] GetBytesFromFile(string filename)
-	{
-		var stream = OpenRead(filename);
-		byte[] ret = null;
-		if (stream != null)
-		{
-			ret = new byte[stream.Length];
-			stream.Read(ret, 0, (int)stream.Length);
-			stream.Close();
-		}
-		return ret;
 	}
 
 	public static FileStream OpenWrite(string pathname)
@@ -171,6 +129,167 @@ public static partial class FileUtils
 		}
 	}
 
+	// 同步方法
+	static string __GetStringFromFile(string filename)
+	{
+		var stream = File.OpenRead(filename);
+		string ret = null;
+		if (stream != null)
+		{
+			using (var reader = new StreamReader(stream, System.Text.Encoding.UTF8))
+			{
+				ret = reader.ReadToEnd();
+			}
+			stream.Close();
+		}
+		return ret;
+	}
+
+	public static void GetStringFromFileAsync(string filename, Action<string> callback)
+	{
+		GetBytesFromFileAsync(filename, (data) =>
+		{
+			if (callback != null)
+			{
+				callback(StringUtils.BytesToString(data));
+			}
+		});
+	}
+
+	static IEnumerable<string> __GetStringArrayFromFile(string filename)
+	{
+		var stream = File.OpenRead(filename);
+		if (stream != null)
+		{
+			using (var reader = new StreamReader(stream, System.Text.Encoding.UTF8))
+			{
+				while (!reader.EndOfStream)
+				{
+					yield return reader.ReadLine();
+				}
+			}
+			stream.Close();
+		}
+	}
+
+	public static void GetStringArrayFromFileAsync(string filename, Action<string[]> callback)
+	{
+		GetBytesFromFileAsync(filename, (data) =>
+		{
+			if (callback != null)
+			{
+				callback(StringUtils.BytesToStringArray(data));
+			}
+		});
+	}
+
+	static byte[] __GetBytesFromFile(string filename)
+	{
+		var stream = File.OpenRead(filename);
+		byte[] ret = null;
+		if (stream != null)
+		{
+			ret = new byte[stream.Length];
+			try
+			{
+				stream.Read(ret, 0, (int)stream.Length);
+			}
+			catch (IOException e)
+			{
+				Log.Error("[FileUtils] read bytes from file {0} error, {1}", stream.Name, e.Message);
+			}
+			finally
+			{
+				stream.Close();
+			}
+		}
+		return ret;
+	}
+	//
+
+	struct AsyncState
+	{
+		public FileStream fileStream;
+		public byte[] buffer;
+		public System.Action<byte[]> callback;
+	}
+
+	// 异步方法
+	static void __GetBytesFromFileAsync(string filename, System.Action<byte[]> callback)
+	{
+		var stream = File.OpenRead(filename);
+		if (stream != null)
+		{
+			AsyncState state = new AsyncState();
+			state.fileStream = stream;
+			state.callback = callback;
+			state.buffer = new byte[stream.Length];
+			try
+			{
+				stream.BeginRead(state.buffer, 0, state.buffer.Length, __OnCompletedRead, state);
+			}
+			catch (IOException e)
+			{
+				Log.Error("[FileUtils] async begin read bytes from file {0} error, {1}", stream.Name, e.Message);
+			}
+		}
+	}
+
+	static void __OnCompletedRead(IAsyncResult asyncResult)
+	{
+		var asyncState = (AsyncState)asyncResult.AsyncState;
+		try
+		{
+			int bytesRead = asyncState.fileStream.EndRead(asyncResult);
+			if (bytesRead == asyncState.buffer.Length)
+			{
+				if (asyncState.callback != null)
+				{
+					// callback on main thread
+					SchedulerUtils.MainThread_Invoke(() => {
+						asyncState.callback(asyncState.buffer);
+					});
+				}
+			}
+			else
+			{
+				Log.Error("[FileUtils] async end read bytes from file {0} error", asyncState.fileStream.Name);
+			}
+		}
+		catch (IOException e)
+		{
+			Log.Error("[FileUtils] async end read bytes from file {0} error, {1}", asyncState.fileStream.Name, e.Message);
+		}
+		finally
+		{
+			asyncState.fileStream.Close();
+		}
+	}
+
+	public static MemoryStream GetMemoryStreamFromFile(string filename)
+	{
+		byte[] bytes = GetBytesFromFile(filename);
+		if (bytes != null)
+		{
+			return new MemoryStream(bytes);
+		}
+		return null;
+	}
+
+	public static void GetMemoryStreamFromFileAsync(string filename, System.Action<MemoryStream> callback)
+	{
+		GetBytesFromFileAsync(filename, (bytes) => {
+			if (callback != null)
+			{
+				if (bytes != null) {
+					callback(new MemoryStream(bytes));
+				} else {
+					callback(null);
+				}
+			}
+		});
+	}
+
 	public static void CreateParentDirectoryIfNeed(string pathname)
 	{
 		string fullpath = GetWritablePathForPathname(pathname);
@@ -211,6 +330,18 @@ public static partial class FileUtils
 			if (File.Exists(fullpath))
 			{
 				File.Delete(fullpath);
+			}
+		}
+	}
+
+	public static void RemoveDir(string folder, bool recursive)
+	{
+		string fullpath = GetWritablePathForPathname(folder);
+		if (!string.IsNullOrEmpty(fullpath))
+		{
+			if (Directory.Exists(fullpath))
+			{
+				Directory.Delete(fullpath, recursive);
 			}
 		}
 	}
