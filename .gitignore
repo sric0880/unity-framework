@@ -31,3 +31,4 @@ sysinfo.txt
 /lua/tolua
 .DS_Store
 */.DS_Store
+.vscode/

@@ -11,9 +11,9 @@ makeFileName = os.path.join(__script_path__, 'makefile.yml')
 windows = platform.system().startswith("Windows")
 
 if windows:
-	exe = '%s/flatc.exe --csharp --gen-mutable %s' % (__script_path__, fbsFileName)
+	exe = '%s/flatc.exe --csharp --gen-mutable -o src %s' % (__script_path__, fbsFileName)
 else:
-	exe = '%s/flatc --csharp --gen-mutable %s' % (__script_path__, fbsFileName)
+	exe = '%s/flatc --csharp --gen-mutable -o src %s' % (__script_path__, fbsFileName)
 
 if os.system(exe) != 0:
 	raise Exception('run flatc failed')

@@ -5,5 +5,5 @@ depends:
 defines: 
 files:
 folders:
- - UF/GameSave//*.cs
- - net/FlatBuffers/*.cs
+ - src/UF/GameSave/*.cs
+ - src/net/FlatBuffers/*.cs

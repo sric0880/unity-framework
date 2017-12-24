@@ -1,0 +1,13 @@
+out: Protobuf.dll
+main: 
+debug: No
+depends:
+defines: NET35
+files:
+folders:
+ - src/Google.Protobuf/*.cs
+ - src/Google.Protobuf/Collections/*.cs
+ - src/Google.Protobuf/Compatibility/*.cs
+ - src/Google.Protobuf/Properties/*.cs
+ - src/Google.Protobuf/Reflection/*.cs
+ - src/Google.Protobuf/WellKnownTypes/*.cs
