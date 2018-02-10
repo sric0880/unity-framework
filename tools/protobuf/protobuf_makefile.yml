@@ -1,4 +1,4 @@
-out: Protobuf.dll
+out: bin/Protobuf.dll
 main: 
 debug: No
 depends:

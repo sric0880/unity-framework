@@ -5,6 +5,9 @@ using System.Collections;
 public class TestReadConfig : MonoBehaviour {
 
 	void Start () {
-		ConfigReader.ReadConfigAsBin(typeof(Config), "conf");
+		Log.Init(Log.Tag.Verbose, true, false);
+		UF.Managers.ConfigManager.Instance.OnInit();
+		UF.Managers.ConfigManager.Instance.LoadLaunch();
+		UF.Managers.ConfigManager.Instance.LoadMain();
 	}
 }

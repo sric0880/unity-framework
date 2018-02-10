@@ -1,1 +1,0 @@
-L_listOfFloat = {0}

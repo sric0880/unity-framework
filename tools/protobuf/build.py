@@ -5,9 +5,11 @@ __project_path__ = os.path.dirname(os.path.dirname(__script_path__))
 __assets_path__ = os.path.join(__project_path__, 'Assets')
 __plugins_path__ = os.path.join(__assets_path__, 'Plugins')
 
+## Fixme
+allProtoFiles = { 'client/*.proto', 'common/*.proto' }
 
 protoDir = os.path.join(__script_path__, 'protos')
-protoFileName = 'addressbook.proto'
+protoFileName = ' '.join({os.path.join(protoDir, x) for x in allProtoFiles})
 makeFileName = os.path.join(__script_path__, 'protos_makefile.yml')
 
 windows = platform.system().startswith("Windows")

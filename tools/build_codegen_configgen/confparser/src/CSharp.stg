@@ -1,0 +1,159 @@
+class(namespace, classBody) ::= <<
+// Auto generated code
+using System;
+using System.IO;
+using System.Collections.Generic;
+using UF.Config.Attr;
+
+<if(namespace)>
+<namespace>
+{
+    <classBody>
+}
+<else>
+<classBody>
+<endif>
+>>
+
+namespace(ns) ::= "namespace <ns>"
+
+classBody(attrs, name, members, readExprs, writeExprs) ::= <<
+<attrs;separator="\n">
+public class <name> : ISerializable {
+    <members;separator="\n">
+
+    public void Serialize(BinaryWriter o)
+    {
+        <writeExprs;separator="\n">
+    }
+
+    public void Deserialize(BinaryReader o)
+    {
+        <readExprs;separator="\n">
+    }
+}
+>>
+
+attr(name, args) ::= <<
+[<name><args>]
+>>
+
+attrArgs(arg) ::= <<(<arg;separator=",">)>>
+
+enumBody(name, enums) ::= <<
+public enum <name> {
+    <enums;separator="\n">
+}
+>>
+
+enumexpr(name, integer) ::= "<name> = <integer>,"
+
+member(attrs, type, id) ::= <<
+<attrs;separator="\n">
+public <type> <id>;
+>>
+
+dict(keyType, valueType) ::= "Dictionary\<<keyType>, <valueType>>"
+
+type(typeName) ::= "<typeName>"
+
+array(typeName) ::= "<typeName>[]"
+
+array_serializer(type, typeName, readExpr, writeExpr) ::= <<
+public static class <typeName>
+{
+	public static void Serialize(BinaryWriter o, <type>[] d)
+	{
+	    int size = d.Length;
+	    o.Write(size);
+	    for(int i = 0; i \< size; ++i)
+	    {
+	        <writeExpr>
+	    }
+	}
+
+	public static <type>[] Deserialize(BinaryReader o)
+	{
+		int size = o.ReadInt32();
+		<type>[] d = new <type>[size];
+		for(int i = 0; i \< size; ++i)
+		{
+		    <readExpr>
+		}
+		return d;
+	}
+}
+>>
+
+dict_serializer(keyType, valueType, typeName, keyReadExpr, valueReadExpr, keyWriteExpr, valueWriteExpr) ::= <<
+public static class <typeName>
+{
+	public static void Serialize(BinaryWriter o, Dictionary\<<keyType>, <valueType>\> d)
+	{
+	    int size = d.Count;
+	    o.Write(size);
+	    foreach(var elem in d)
+	    {
+	        <keyWriteExpr>
+	        <valueWriteExpr>
+	    }
+	}
+
+	public static Dictionary\<<keyType>, <valueType>\> Deserialize(BinaryReader o)
+	{
+		Dictionary\<<keyType>, <valueType>\> d = new Dictionary\<<keyType>, <valueType>\>();
+		int size = o.ReadInt32();
+		for(int i = 0; i \< size; ++i)
+		{
+		    <keyType> key;
+		    <keyReadExpr>
+		    <valueType> value;
+		    <valueReadExpr>
+		    d.Add(key, value);
+		}
+		return d;
+	}
+}
+>>
+
+class_read_expr(var, serializerName) ::= "<var> = new <serializerName>(); <var>.Deserialize(o);"
+class_write_expr(var) ::= "<var>.Serialize(o);"
+
+dict_or_array_read_expr(var, serializerName) ::= "<var> = <serializerName>.Deserialize(o);"
+dict_or_array_write_expr(var, serializerName) ::= "<serializerName>.Serialize(o, <var>);"
+
+enum_read_expr(var, type) ::= "<var> = (<type>)o.ReadInt32();"
+enum_write_expr(var) ::= "o.Write((int)<var>);"
+
+bool_read_expr(var) ::= "<var> = o.ReadBoolean();"
+bool_write_expr(var) ::= "o.Write(<var>);"
+
+byte_read_expr(var) ::= "<var> = o.ReadByte();"
+byte_write_expr(var) ::= "o.Write(<var>);"
+
+double_read_expr(var) ::= "<var> = o.ReadDouble();"
+double_write_expr(var) ::= "o.Write(<var>);"
+
+short_read_expr(var) ::= "<var> = o.ReadInt16();"
+short_write_expr(var) ::= "o.Write(<var>);"
+
+int_read_expr(var) ::= "<var> = o.ReadInt32();"
+int_write_expr(var) ::= "o.Write(<var>);"
+
+long_read_expr(var) ::= "<var> = o.ReadInt64();"
+long_write_expr(var) ::= "o.Write(<var>);"
+
+float_read_expr(var) ::= "<var> = o.ReadSingle();"
+float_write_expr(var) ::= "o.Write(<var>);"
+
+ushort_read_expr(var) ::= "<var> = o.ReadUInt16();"
+ushort_write_expr(var) ::= "o.Write(<var>);"
+
+uint_read_expr(var) ::= "<var> = o.ReadUInt32();"
+uint_write_expr(var) ::= "o.Write(<var>);"
+
+ulong_read_expr(var) ::= "<var> = o.ReadUInt64();"
+ulong_write_expr(var) ::= "o.Write(<var>);"
+
+string_read_expr(var) ::= "<var> = o.ReadString();"
+string_write_expr(var) ::= "o.Write(<var>);"

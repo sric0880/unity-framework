@@ -1,0 +1,15 @@
+syntax = "proto3";
+package client;
+
+option csharp_namespace = "UF.Config";
+
+message ConfTestPrimitive {
+	int32 mInt = 1;
+	float mFloat = 2;
+	double mDouble = 3;
+	bool mBool = 4;
+	int32 mByte = 5;
+	int32 mShort = 6;
+	int64 mLong = 7;
+	string mStr = 8;
+}

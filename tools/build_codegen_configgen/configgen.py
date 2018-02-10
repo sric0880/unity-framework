@@ -24,13 +24,12 @@ def __convertXlsx2JsonOrLua():
 		for filename in files:
 			pathname = os.path.join(parent, filename)
 			if os.path.isfile(pathname) and pathname.endswith('.xlsx') and '~' not in pathname:
-				if filename.startswith('[lua]'):
+				if 'lua' in parent:
 					print('convert %s to lua file' % filename)
-					convertXlsx2Lua(pathname, filename[5:-5])
+					convertXlsx2Lua(pathname, filename[0:-5])
 					luafilename = filename.replace('.xlsx', '.lua')
 					srcluapathname = pathname.replace('.xlsx', '.lua')
 					desluapathname = os.path.join(luaExportDir, luafilename)
-					desluapathname = desluapathname.replace('[lua]', '')
 					destdir = os.path.dirname(desluapathname)
 					if not os.path.exists(destdir):
 						os.mkdir(destdir)
@@ -41,6 +40,7 @@ def __convertXlsx2JsonOrLua():
 
 def removeJsonFiles():
 	for parent, dirs, files in os.walk(xlsxConfigFolder):
+		if 'server' in parent: continue
 		for filename in files:
 			pathname = os.path.join(parent, filename)
 			if os.path.isfile(pathname) and pathname.endswith('.json'):

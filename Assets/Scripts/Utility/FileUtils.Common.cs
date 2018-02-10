@@ -7,8 +7,8 @@ public static partial class FileUtils
 {
 	public const string export_boot_config_folder = "bootconfigexport";
 	public const string binary_config_folder = "bin";
-	public static string boot_locale_folder { get { return Replace.R("bootlocale/{locale}", LaunchConfig.boot); } }
-	public static string locale_folder { get { return Replace.R("locale/{locale}/dictionary", LaunchConfig.boot); } }
+	public static string boot_locale_folder { get { return Replace.R("bootlocale/{locale}", UF.Managers.ConfigManager.Instance.launch.boot); } }
+	public static string locale_folder { get { return Replace.R("locale/{locale}/dictionary", UF.Managers.ConfigManager.Instance.launch.boot); } }
 	public static string log_file(int index) { return string.Format("log/log_{0}.txt", index); }
 	public static string bundle_folder { get { return string.Format("assets/{0}", PlatformNameUtils.GetPlatformName()); } }
 	public static string gamesave(long roleId) { return string.Format("gamesave/{0}", roleId); }

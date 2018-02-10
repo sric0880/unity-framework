@@ -1,0 +1,14 @@
+syntax = "proto3";
+package client;
+
+option csharp_namespace = "UF.Config";
+
+message ConfHero {
+	repeated int32 attack_sections = 1;
+	repeated float attack_wait_time_min = 2;
+	repeated float attack_wait_time_max = 3;
+	repeated float attack_wait_time = 4;
+	float attack_weight = 5;
+	repeated float skill_weight = 6;
+	int32 test_add = 7;
+}

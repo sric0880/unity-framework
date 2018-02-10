@@ -1,7 +1,7 @@
-Strings = {
+strings = {
 	main_menu = "Text",
-	start_film = "wowow",
-	fight_result = "__Text198gggg",
+	fight_result = "Text",
+	start_film = "Text",
 	login = "Text",
-	new_card = "ohmhygo3"
+	new_card = "ohmhygo2"
 }

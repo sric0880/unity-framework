@@ -1,0 +1,15 @@
+syntax = "proto3";
+package client;
+
+option csharp_namespace = "UF.Config";
+
+import "common/enum_modules.proto";
+
+message ConfTestListAndDict {
+	repeated string stars = 1;
+	repeated int32 levels = 2;
+	map<uint32, string> names = 3;
+	map<string, int32> heroes = 4;
+	repeated int32 listofHeros = 5;
+	common.Modules module = 6;
+}

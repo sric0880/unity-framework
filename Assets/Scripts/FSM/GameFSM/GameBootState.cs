@@ -6,7 +6,7 @@ public class GameBootState : State
 {
 	public override void EnterState(FSM fsm, State fromState)
 	{
-		ConfigReader.ReadConfigAsBin(typeof(LaunchConfig), "launch_conf");
+		UF.Managers.ConfigManager.Instance.LoadLaunch();
 		//TODO: from launch config
 		Log.Init(Log.Tag.Debug, true, true);
 	}

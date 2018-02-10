@@ -1,0 +1,15 @@
+syntax = "proto3";
+package client;
+
+option csharp_namespace = "UF.Config";
+
+message ConfTestDict {
+	int32 id = 1;
+	string name = 2;
+	string desc = 3;
+	int32 hero_id = 4;
+	bool isMale = 5;
+	repeated string model_male = 6;
+	repeated string model_female = 7;
+	string carrer_icon_path = 8;
+}

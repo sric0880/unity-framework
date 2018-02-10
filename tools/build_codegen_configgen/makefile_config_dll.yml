@@ -1,0 +1,20 @@
+out: bin/Config.dll
+main:
+debug: No
+depends:
+defines: 
+files:
+ - ConfigGen/ConfigGen/Attribute/ExportAttribute.cs
+ - ConfigGen/ConfigGen/Attribute/XlsxNameAttribute.cs
+ - ConfigGen/ConfigGen/Attribute/ValidateAttribute.cs
+ - ConfigGen/ConfigGen/Attribute/IDAttribute.cs
+ - ConfigGen/ConfigGen/Attribute/RefIDAttribute.cs
+ - ConfigGen/ConfigGen/Attribute/MaxAttribute.cs
+ - ConfigGen/ConfigGen/Attribute/MinAttribute.cs
+ - ConfigGen/ConfigGen/Attribute/LocaleAttribute.cs
+ - ConfigGen/ConfigGen/Attribute/RequireAttribute.cs
+ - ConfigGen/ConfigGen/ConfigHelper.cs
+ - ConfigGen/ConfigGen/ISerializable.cs
+ - ConfigGen/ConfigGen/Utility/TypeUtility.cs
+folders:
+ - ConfigGen/AutoGen/*.cs

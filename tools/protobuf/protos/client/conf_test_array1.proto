@@ -1,0 +1,9 @@
+syntax = "proto3";
+package client;
+
+option csharp_namespace = "UF.Config";
+
+message ConfTestArray1 {
+	string address = 1;
+	repeated uint32 random_port = 2;
+}

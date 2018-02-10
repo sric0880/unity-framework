@@ -1,0 +1,5 @@
+/Users/qiong/Documents/myProject/unity-framework/tools/build_codegen_configgen/src/BinaryConf/CodeGen/obj/x86/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
+/Users/qiong/Documents/myProject/unity-framework/tools/build_codegen_configgen/src/BinaryConf/CodeGen/bin/Debug/CodeGen.exe.mdb
+/Users/qiong/Documents/myProject/unity-framework/tools/build_codegen_configgen/src/BinaryConf/CodeGen/bin/Debug/CodeGen.exe
+/Users/qiong/Documents/myProject/unity-framework/tools/build_codegen_configgen/src/BinaryConf/CodeGen/obj/x86/Debug/CodeGen.exe
+/Users/qiong/Documents/myProject/unity-framework/tools/build_codegen_configgen/src/BinaryConf/CodeGen/obj/x86/Debug/CodeGen.exe.mdb

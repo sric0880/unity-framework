@@ -5,5 +5,5 @@ depends:
  - ../../Assets/Plugins/Protobuf.dll
 defines:
 files:
- - src/Protos/Addressbook.cs
+ - src/Protos/*.cs
 folders:

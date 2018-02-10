@@ -1,0 +1,12 @@
+syntax = "proto3";
+package client;
+
+option csharp_namespace = "UF.Config";
+
+import "client/conf_test_array1.proto";
+
+message ConfTestArray {
+	string name = 1;
+	uint32 serverid = 2;
+	repeated ConfTestArray1 address_list = 3;
+}

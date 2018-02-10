@@ -12,7 +12,7 @@ public class GUIConsole : MonoBehaviour {
 	private List<GUIConsoleHeader> headers;
 
 	void Start () {
-		enabled = LaunchConfig.boot.show_console;
+		enabled = UF.Managers.ConfigManager.Instance.launch.boot.show_console;
         pages = new List<GUIConsolePage>();
 		headers = new List<GUIConsoleHeader>();
 

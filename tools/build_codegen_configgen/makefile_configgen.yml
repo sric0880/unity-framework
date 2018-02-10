@@ -1,0 +1,12 @@
+out: bin/configgen.exe
+main: UF.Config.ConfiggenExe
+debug: Yes
+depends:
+ - bin/FullSerializer.dll
+ - bin/Config.dll
+defines:
+files:
+ - ConfigGen/ConfigGen/Main/ConfiggenExe.cs
+ - ConfigGen/ConfigGen/Main/MyCustomEnumConverter.cs
+ - ConfigGen/ConfigGen/Main/MyDictionaryConverter.cs
+folders:

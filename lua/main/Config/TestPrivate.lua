@@ -1,3 +1,0 @@
-TestPrivate = {
-	yes = 0
-}

@@ -1,0 +1,38 @@
+// config for client
+
+syntax = "proto3";
+package client;
+
+option csharp_namespace = "UF.Config";
+
+// Note that enum is not a valid key_type
+/*
+.proto Type: double float int32 int64 uint32 uint64 
+sint32 sint64 fixed32 fixed64 sfixed32 sfixed64 bool string bytes
+C# Type: double float int long uint ulong
+int long uint ulong int long bool string ByteString
+*/
+
+import "common/enum_modules.proto";
+import "client/conf_test_enum.proto";
+import "client/conf_test_primitive.proto";
+import "client/conf_test_array.proto";
+import "client/conf_test_dict.proto";
+import "client/conf_test_dict2.proto";
+import "client/conf_hero.proto";
+import "client/conf_test_list_and_dict.proto";
+
+message Config {
+	ConfTestEnum confenum = 1;
+	ConfTestPrimitive confprimitive = 2;
+	repeated ConfTestArray server_list = 3;
+	map<uint32, ConfTestDict> testIntDict = 7;
+	map<string, ConfTestDict2> testStrDict = 8;
+	map<uint32, ConfHero> testHeroes = 9;
+	repeated ConfTestListAndDict listoflist = 10;
+	ConfTestListAndDict testlistAndDict = 11;
+	repeated int32 testIntList = 12;
+	repeated string testStrList = 13;
+	repeated common.Modules testEnumList = 14;
+	repeated float testFloatList = 15;
+}

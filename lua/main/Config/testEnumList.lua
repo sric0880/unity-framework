@@ -1,0 +1,1 @@
+testEnumList = {"MODULES_1","MODULES_4","MODULES_2","MODULES_3"}

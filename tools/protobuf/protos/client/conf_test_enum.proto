@@ -1,0 +1,13 @@
+syntax = "proto3";
+package client;
+
+option csharp_namespace = "UF.Config";
+
+import "common/enum_modules.proto";
+
+message ConfTestEnum {
+	int32 integer = 1;
+	repeated int32 arrays = 2;
+	repeated common.Modules modulesEnums = 3;
+	repeated common.Modules moduelsEnums2 = 4;
+}

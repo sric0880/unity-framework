@@ -1,0 +1,15 @@
+out: bin/jsonexample.exe
+main: UF.Config.ExampleGenExe
+debug: Yes
+depends:
+ - bin/FullSerializer.dll
+ - bin/Config.dll
+defines:
+files:
+ - ConfigGen/ConfigGen/Utility/InstanceUtility.cs
+ - ConfigGen/ConfigGen/Main/ExampleGenExe.cs
+ - ConfigGen/ConfigGen/Main/MyCustomEnumConverter.cs
+ - ConfigGen/ConfigGen/Main/MyDictionaryConverter.cs
+ - ConfigGen/ConfigGen/Main/LocaleJsonObject.cs
+folders:
+ 

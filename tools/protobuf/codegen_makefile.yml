@@ -1,0 +1,10 @@
+out: bin/codegen.exe
+main: ProtoBufDump
+debug: Yes
+depends:
+ - bin/Protobuf.dll
+defines:
+files:
+ - src/Protos/*.cs
+ - src/ProtoBufDump.cs
+folders:

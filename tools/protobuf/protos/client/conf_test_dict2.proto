@@ -1,0 +1,10 @@
+syntax = "proto3";
+package client;
+
+option csharp_namespace = "UF.Config";
+
+message ConfTestDict2 {
+	string stringId = 1;
+	int32 role_level = 2;
+	int32 finish_dungeon_id = 3;
+}
